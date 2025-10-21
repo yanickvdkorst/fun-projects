@@ -17,13 +17,13 @@ const scrollReady = inject('scrollReady')
 watch(scrollReady, (ready) => {
   if (ready) {
     gsap.to(".jannes", {
-      yPercent: -92,
+      yPercent: -50,
       ease: "none",
       scrollTrigger: {
         trigger: ".cta",
         start: "top bottom",
-        end: "bottom top",
-        scrub: true,
+        end: "bottom bottom",
+        scrub: 1,
         // markers: true,
       }
     })

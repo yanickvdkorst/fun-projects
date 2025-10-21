@@ -29,8 +29,8 @@ gsap.registerPlugin(ScrollTrigger)
 const scrollReady = inject('scrollReady')
 
 onMounted(() => {
-  watch(scrollReady, (ready) => {
-    if (ready) {
+//   watch(scrollReady, (ready) => {
+//     if (ready) {
       // Jannes blijft gepind in het midden
       ScrollTrigger.create({
         trigger: ".albums",
@@ -42,7 +42,7 @@ onMounted(() => {
       });
 
       // Album-afbeeldingen komen één voor één in beeld
-      gsap.utils.toArray(".image-container").forEach((container, i) => {
+      gsap.utils.toArray(".albums .image-container").forEach((container, i) => {
         gsap.from(container, {
           opacity: 0,
           scale: 0.8,
@@ -55,14 +55,14 @@ onMounted(() => {
           }
         });
       });
-    }
-  });
+//     }
+//   });
 });
 </script>
 
 
 <style scoped>
-    .albums { position: relative; height: 200vh; overflow: hidden; background-image: url('/jannes_optreden.png'); background-repeat: no-repeat; background-size: cover; background-position: center;} 
+    .albums { position: relative; height: 200vh; overflow: hidden; } 
 
 .image-container {
   aspect-ratio: 1 / 1;
@@ -85,7 +85,7 @@ onMounted(() => {
 
 .jannes-image { position: absolute; top: 0; left: 50%; transform: translate(-50%); z-index: 10;width: 200px; display: none;}
 
-.background-layer {
+/* .background-layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -95,5 +95,5 @@ onMounted(() => {
   background-size: cover;
   background-position: center;
   z-index: 0;
-}
+} */
 </style>

@@ -14,21 +14,23 @@ gsap.registerPlugin(ScrollTrigger)
 
 const scrollReady = inject('scrollReady')
 
-watch(scrollReady, (ready) => {
-  if (ready) {
-    gsap.to(".jannes", {
-      yPercent: -50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".cta",
-        start: "top bottom",
-        end: "bottom bottom",
-        scrub: 1,
-        // markers: true,
-      }
-    })
-  }
-})
+onMounted(() => {
+    // watch(scrollReady, (ready) => {
+    // if (ready) {
+        gsap.to(".jannes", {
+        yPercent: -50,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".cta",
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1,
+            // markers: true,
+        }
+        })
+    // }
+    // })
+});
 </script>
 
 <style scoped>

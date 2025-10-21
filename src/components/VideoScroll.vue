@@ -25,18 +25,17 @@ onMounted(() => {
   vid.value.addEventListener('loadedmetadata', () => {
     const duration = vid.value.duration
 
-    ScrollTrigger.create({
-      trigger: wrapper.value,
-      start: 'top top',
-      end: '+=' + duration * 1000 + 'px',
-      scrub: true,
-      pin: true,
-      onUpdate: (self) => {
-        vid.value.currentTime = duration * self.progress
-      },
-    })
+  const scrollMultiplier = 300; // pixels per seconde video
+  ScrollTrigger.create({
+    trigger: wrapper.value,
+    start: 'top top',
+    end: '+=' + duration * scrollMultiplier + 'px', 
+    scrub: true,
+    pin: true,
+    onUpdate: self => vid.value.currentTime = duration * self.progress
+  })
 
-    scrollReady.value = true // ✅ geef aan dat ScrollTrigger klaar is
+    scrollReady.value = true;
     ScrollTrigger.refresh()
   })
 })

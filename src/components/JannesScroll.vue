@@ -6,25 +6,29 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import { onMounted, inject, watch } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger)
 
-// onMounted(() => {
-//   gsap.to(".jannes", {
-//     yPercent: -120, // beweegt omhoog
-//     ease: "none",
-//     scrollTrigger: {
-//       trigger: ".cta",
-//       start: "top bottom",   // wanneer .cta in beeld komt
-//       end: "bottom top",     // wanneer .cta uit beeld gaat
-//       scrub: true,
-//       markers: true,         // voor debug, kan uit
-//     }
-//   });
-// });
+const scrollReady = inject('scrollReady')
+
+watch(scrollReady, (ready) => {
+  if (ready) {
+    gsap.to(".jannes", {
+      yPercent: -92,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".cta",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        // markers: true,
+      }
+    })
+  }
+})
 </script>
 
 <style scoped>
@@ -34,10 +38,9 @@ gsap.registerPlugin(ScrollTrigger);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #111;
   overflow: hidden;
+  background: #111;
 }
-
 .cta img {
   position: absolute;
   bottom: -50%;
@@ -46,14 +49,12 @@ gsap.registerPlugin(ScrollTrigger);
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
-  margin-top: 3rem;
 }
-
 h1 {
   font-size: 128px;
   color: white;
-  text-transform: uppercase;
   font-weight: bold;
+  text-transform: uppercase;
   z-index: 2;
 }
 </style>

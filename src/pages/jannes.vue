@@ -2,8 +2,10 @@
 import AlbumScroll from '../components/AlbumScroll.vue';
 import BannerHero from '../components/BannerHero.vue';
 import CompleteScroll from '../components/CompleteScroll.vue';
+import ConcurentionScroll from '../components/ConcurentionScroll.vue';
 import CounterSection from '../components/CounterSection.vue';
 import JannesScroll from '../components/JannesScroll.vue';
+
 
 import { provide, ref } from 'vue'
 
@@ -18,6 +20,7 @@ provide('scrollReady', scrollReady);
     headline="ZIJN NAAM IS"
 />
   <BannerHero />
+  <ConcurentionScroll />
   <JannesScroll />
   <AlbumScroll />
   <CounterSection />

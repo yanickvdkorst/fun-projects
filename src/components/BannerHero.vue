@@ -2,7 +2,7 @@
     <section class="banner">
         <div class="content">
                 <h1 ref="headline">JANNES</h1>
-                <div class="content-bottom">
+                <div class="content-bottom" ref="contentBottom">
                     <p>van het</p>
                     <p>platteland</p>
                 </div>
@@ -15,8 +15,10 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { gsap } from "gsap";
 
 const headline = ref(null)
+const contentBottom = ref(null)
 
 function resizeHeadline() {
   const el = headline.value
@@ -31,6 +33,21 @@ function resizeHeadline() {
 onMounted(() => {
   resizeHeadline()
   window.addEventListener('resize', resizeHeadline)
+
+  const elements = [headline.value, ...contentBottom.value.children]
+
+  gsap.from(elements, {
+    y: 100,           // start 100px lager
+    opacity: 0,       // fade in
+    duration: 1,
+    ease: 'power2.out',
+    stagger: 0.2,     // lichte delay per element
+    scrollTrigger: {
+      trigger: '.banner',
+      start: 'top 80%',  // animatie start wanneer banner bijna in beeld
+      toggleActions: 'play none none none'
+    }
+  })
 })
 
 onBeforeUnmount(() => {

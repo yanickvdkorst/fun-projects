@@ -18,7 +18,7 @@
       <div>E</div>
       <div>R</div>
       <div>G</div> -->
-      <h1>{{ headline }}</h1>
+      <h1 class="headline">{{ headline }}</h1>
     </div>
 
     <div class="overlay overlay--black intro__overlay" ref="overlay">
@@ -36,6 +36,10 @@
 import { onMounted, ref } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(SplitText);
 
 // ✅ Props voor dynamische content
 defineProps({
@@ -49,12 +53,12 @@ defineProps({
   }
 })
 
-gsap.registerPlugin(ScrollTrigger)
 
 // ✅ Eerst alle refs declareren
 const video = ref(null)
 const overlay = ref(null)
 const lines = ref(null) // Deze regel ontbrak
+
 
 onMounted(() => {
   gsap.to(video.value, {
@@ -63,6 +67,36 @@ onMounted(() => {
     ease: 'power2.out',
     delay: 1,
   })
+
+const split = new SplitText(".headline", { type: "chars" })
+
+split.chars.forEach((char, i) => {
+  const rolls = 5                 // aantal keren dat een letter "rolt"
+  const rollDuration = 0.5        // duur van 1 val
+  const delay = i * 0.05          // stagger tussen letters
+
+  // Rol animatie
+  gsap.fromTo(char,
+    { y: -100 },                 // start boven
+    {
+      y: 100,                     // rol naar beneden
+      duration: rollDuration,
+      ease: "power1.inOut",
+      repeat: rolls,
+      yoyo: false,
+      delay: delay
+    }
+  )
+
+  // Laatste landing animatie, in het midden
+  gsap.to(char, {
+    y: 0,                        // eindpositie
+    duration: 0.6,
+    ease: "power4.out",
+    delay: delay + rolls * rollDuration
+  })
+})
+
 
   const bars = overlay.value.querySelectorAll('.bar')
   const lineElements = lines.value.querySelectorAll('.vertical-lines__line')
@@ -115,6 +149,7 @@ onMounted(() => {
   left: 0;
   z-index: 1;
 }
+
 
 .vertical-lines {
   height: 100%;

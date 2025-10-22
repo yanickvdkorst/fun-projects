@@ -2,7 +2,7 @@
   <section class="banner">
     <div class="animation-wrapper" ref="wrapper">
       <div class="hero">
-        <video ref="vid" muted playsinline preload="auto">
+        <video ref="vid" muted playsinline preload="auto" class="vid">
           <source src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4" type="video/mp4"/>
         </video>
       </div>
@@ -51,8 +51,12 @@ onMounted(() => {
   overflow: hidden;
 }
 video {
+  position: relative;
   width: 70%;
   height: auto;
   object-fit: cover;
 }
+video::after  {content: ''; position: absolute; left: 0; top: 0; bottom: 0; right: 0; background-color: blue;}
+
+
 </style>

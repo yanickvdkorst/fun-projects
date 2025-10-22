@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 
-    .banner             {  background: #111; height: 100vh; max-width: 1420px; margin: auto;}
+    .banner             {  background: #111; height: 100vh; max-width: 1420px; margin: auto; position: relative;}
     .image-container    {position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);}
 
     .content h1         {font-size: 8rem; text-align: center; margin-bottom: 0; display: inline-block; line-height: 1.2;}

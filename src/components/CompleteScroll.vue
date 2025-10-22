@@ -1,7 +1,7 @@
 <template>
   <section class="hero">
     <video autoplay muted class="video" ref="video" loop>
-      <source src="/video.mp4" type="video/mp4" />
+      <source :src="videoSrc" type="video/mp4" />
     </video>
 
     <div class="vertical-lines vertical-lines--white" ref="lines">
@@ -11,13 +11,14 @@
     </div>
 
     <div class="content">
-      <div>I</div>
+      <!-- <div>I</div>
       <div>C</div>
       <div>E</div>
       <div>B</div>
       <div>E</div>
       <div>R</div>
-      <div>G</div>
+      <div>G</div> -->
+      <h1>{{ headline }}</h1>
     </div>
 
     <div class="overlay overlay--black intro__overlay" ref="overlay">
@@ -35,6 +36,18 @@
 import { onMounted, ref } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// ✅ Props voor dynamische content
+defineProps({
+  videoSrc: {
+    type: String,
+    required: true
+  },
+  headline: {
+    type: String,
+    required: true
+  }
+})
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -161,7 +174,7 @@ onMounted(() => {
 }
 
 .overlay--black > div {
-  background-color: black;
+  background: #111;
   width: 16.6667%;
   transform: scaleX(0);
   transform-origin: left center;

@@ -85,7 +85,7 @@ onMounted(() => {
 
 .jannes-image { position: absolute; top: 0; left: 50%; transform: translate(-50%); z-index: 10;width: 200px; display: none;}
 
-/* .background-layer {
+.background-layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -95,5 +95,5 @@ onMounted(() => {
   background-size: cover;
   background-position: center;
   z-index: 0;
-} */
+}
 </style>

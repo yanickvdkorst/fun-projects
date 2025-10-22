@@ -44,8 +44,9 @@ onMounted(() => {
     stagger: 0.2,     // lichte delay per element
     scrollTrigger: {
       trigger: '.banner',
-      start: 'top 80%',  // animatie start wanneer banner bijna in beeld
-      toggleActions: 'play none none none'
+      start: "top 90%",
+      end: "bottom center",
+      scrub: 0.2,
     }
   })
 })

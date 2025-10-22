@@ -46,16 +46,56 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { Draggable } from "gsap/Draggable";
+import { Physics2DPlugin } from "gsap/Physics2DPlugin"
+
+gsap.registerPlugin(Physics2DPlugin)
 
 gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger, Draggable)
 
 const lineSvg = ref(null)
 onMounted(() => {
   // Maak de images draggable
-  Draggable.create(".jannes-container .image-cover", {
-    type: "x",
-    bounds: ".concurentie"
-  })
+Draggable.create(".jannes-container .image-cover", {
+  type: "x",
+  bounds: ".concurentie",
+
+  onPress: function() {
+    this._last = { time: performance.now(), x: this.x };
+  },
+
+  onDrag: function() {
+    const now = performance.now();
+    if (now - this._last.time > 30) {
+      this._last = { time: now, x: this.x };
+    }
+  },
+
+  onRelease: function() {
+    const now = performance.now();
+    const last = this._last || { time: now, x: this.x };
+    const dt = Math.max(now - last.time, 1);
+    const dx = this.x - last.x;
+    let vx = dx / (dt / 1000);
+
+    // Forceer harde snelheid, ook bij kleine beweging
+    const minSpeed = 1500;        // minimum snelheid
+    const maxSpeed = 4000;        // cap
+    const direction = vx >= 0 ? 0 : 180;
+    const speed = Math.min(Math.max(Math.abs(vx) * 5, minSpeed), maxSpeed); // vermenigvuldig voor kracht
+
+    gsap.killTweensOf(this.target);
+
+    gsap.to(this.target, {
+      duration: 2,
+      physics2D: {
+        velocity: speed,
+        angle: direction,
+        gravity: 800,
+      },
+      ease: "power1.out"
+    });
+  }
+});
 
   // Selecteer de line
   const line = lineSvg.value.querySelector('line')

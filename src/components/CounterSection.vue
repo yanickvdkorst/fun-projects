@@ -95,7 +95,7 @@ onMounted(() => {
 .counter-item h2 {
   font-size: 3rem;
   margin: 0;
-  border-bottom: solid .1rem greenyellow;
+  border-bottom: solid .1rem rgb(255, 255, 255, .2);
   width: fit-content;
   line-height: 1; /* dichter op de tekst */
  margin-bottom: 1rem;

@@ -15,9 +15,9 @@
                 <h2>Marco Schuitmaker</h2>
             </div>
              <div class="concurent">
-                <h2>Snollebollekes</h2>
+                <h2>Frans Duijts</h2>
                 <div class="image-container">
-                    <img src="/snollebollekes.jpg" alt="Snollebollekes">
+                    <img src="/frans.jpg" alt="Snollebollekes">
                 </div>
             </div>
             <div class="concurent">
@@ -105,6 +105,7 @@ onMounted(() => {
       }
     })
   })
+
 })
 </script>
 
